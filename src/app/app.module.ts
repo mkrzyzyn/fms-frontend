@@ -9,8 +9,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoanCalculatorComponent } from './components/loan-calculator/loan-calculator.component';
 import { FormsModule } from '@angular/forms';
-import { NgChartsModule } from 'ng2-charts';
-import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { PieChartCalcComponent } from './components/pie-chart-calc/pie-chart-calc.component';
 
 @NgModule({
@@ -27,8 +25,6 @@ import { PieChartCalcComponent } from './components/pie-chart-calc/pie-chart-cal
     BrowserAnimationsModule,
     NgbModule,
     FormsModule,
-    NgChartsModule,
-    NgxChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent],
