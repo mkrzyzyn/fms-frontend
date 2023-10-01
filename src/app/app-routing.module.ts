@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { LoanCalculatorComponent } from './loan-calculator/loan-calculator.component';
+import { LoanCalculatorComponent } from './components/loan-calculator/loan-calculator.component';
 import { AppComponent } from './app.component';
 
 
