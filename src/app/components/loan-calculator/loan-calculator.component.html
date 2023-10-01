@@ -1,0 +1,186 @@
+<div class="calculator">
+  <h1>Loan calculator</h1>
+
+  <div class="calc-box">
+    <form #calcForm="ngForm" (ngSubmit)="onSubmit(calcForm)">
+      <div class="grid-container">
+        <div class="form-group">
+          <label for="amount">Loan amount (PLN)</label>
+          <input
+            class="styled-input"
+            type="number"
+            id="amount"
+            name="amount"
+            [(ngModel)]="calcData.amount"
+            required
+            pattern="^[1-9][0-9]*$"
+            #amountInput="ngModel"
+          />
+          <br />
+          <input
+            type="range"
+            id="custom-slider"
+            name="slider"
+            min="0"
+            max="200000"
+            step="1"
+            [(ngModel)]="calcData.amount"
+          />
+          <br />
+          <div
+            *ngIf="amountInput.touched && amountInput.invalid"
+            class="error-message"
+          >
+            Please enter a valid value.
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="interest">Interest rate (%)</label>
+          <input
+            class="styled-input"
+            type="number"
+            id="interest"
+            name="interest"
+            step="0.01"
+            [(ngModel)]="calcData.interest"
+            required
+            pattern="^[1-9][0-9]*.?[0-9]*$"
+            #interestInput="ngModel"
+          />
+          <br />
+          <input
+            type="range"
+            id="custom-slider"
+            name="slider"
+            min="0"
+            max="100"
+            step="1"
+            [(ngModel)]="calcData.interest"
+          />
+          <br />
+          <div
+            *ngIf="interestInput.touched && interestInput.invalid"
+            class="error-message"
+          >
+            Please enter a valid value.
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="term">Loan term (years)</label>
+          <input
+            class="styled-input"
+            type="number"
+            id="term"
+            name="term"
+            [(ngModel)]="calcData.term"
+            required
+            pattern="^[1-9][0-9]*$"
+          />
+          <br />
+          <input
+            type="range"
+            id="custom-slider"
+            name="slider"
+            min="0"
+            max="30"
+            step="1"
+            [(ngModel)]="calcData.term"
+          />
+        </div>
+        <div class="form-group">
+          <label for="Fee">Loan fee (%)</label>
+          <input
+            class="styled-input"
+            type="number"
+            id="fee"
+            name="fee"
+            step="0.01"
+            [(ngModel)]="calcData.fee"
+            required
+            pattern="^[0-9]*.?[0-9]*$"
+          />
+          <br />
+          <input
+            type="range"
+            id="custom-slider"
+            name="slider"
+            min="0"
+            max="100"
+            step="1"
+            [(ngModel)]="calcData.fee"
+          />
+        </div>
+        <div class="form-group">
+          <label for="frequency">Payment frequency</label>
+          <select
+            class="styled-input"
+            id="frequency"
+            name="frequency"
+            [(ngModel)]="calcData.frequency"
+          >
+            <option value="monthly">Monthly</option>
+            <option value="weekly">Weekly</option>
+            <option value="biweekly">Biweekly</option>
+            <option value="quaterly">Quaterly</option>
+          </select>
+        </div>
+
+        <div class="radio-group">
+          <label>Loan type</label>
+          <div class="radio-buttons">
+            <input
+              type="radio"
+              id="personal"
+              name="type"
+              value="personal"
+              [(ngModel)]="calcData.type"
+            />
+            <label for="personal">Personal</label>
+            <input
+              type="radio"
+              id="mortgage"
+              name="type"
+              value="mortgage"
+              [(ngModel)]="calcData.type"
+            />
+            <label for="personal">Mortgage</label>
+          </div>
+        </div>
+        <br />
+      </div>
+
+      <div class="centered-button-container">
+        <button
+          type="submit"
+          [disabled]="!calcForm.valid"
+          class="styled-button"
+        >
+          Calculate
+        </button>
+      </div>
+    </form>
+  </div>
+  <br />
+  <div *ngIf="PMT > 0">
+    <h1>Calculation results</h1>
+    <div class="results-box">
+      <p>The calculated monthly payment is: {{ PMT }} PLN</p>
+      <p>The total amount to return is: {{ TAR }} PLN</p>
+      <p>The total interest is: {{ TIN }} PLN</p>
+      <p>The total cost of the loan is: {{ TCL }} PLN</p>
+      <br />
+      <div class="centered-chart-container">
+      <app-pie-chart-calc [data]="outputData"></app-pie-chart-calc>
+      </div>
+      <br>
+      <div class="centered-button-container">
+        <button
+          type="button"
+          class="styled-button"
+        >
+          Show offers
+        </button>
+      </div>      
+    </div>
+  </div>
+</div>

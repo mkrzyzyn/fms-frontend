@@ -1,6 +1,4 @@
-.container {
-  display: flex; /* Use Flexbox to create a row layout */
-}
+
 
 .col-md-3 {
   /* Adjust the width of the sidebar column as needed */
@@ -11,4 +9,8 @@
   /* The content area takes up the remaining space */
   flex: 1;
   padding-left: 0px; /* Add left padding to move content closer to the sidebar */
+}
+
+.full-height-row {
+  height: 100vh !important; /* Set the height to 100% of the viewport height */
 }
