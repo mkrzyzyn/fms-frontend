@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import Chart from 'chart.js/auto';
+import { BackendService } from 'src/app/services/backend.service';
 
 @Component({
   selector: 'app-loan-calculator',
@@ -8,6 +8,8 @@ import Chart from 'chart.js/auto';
   styleUrls: ['./loan-calculator.component.scss'],
 })
 export class LoanCalculatorComponent {
+
+  constructor(private backendService: BackendService){}
 
   calcData = {
     amount: 20000,
@@ -80,6 +82,22 @@ export class LoanCalculatorComponent {
       this.outputData =  [this.calcData.amount, this.TIN, feeAmount];
 
     }
+  }
+
+  showOffers(){
+    this.backendService.getLoanData().subscribe((data:any) => {
+     // Handle the data received from the backend.
+      console.log(data);
+    });
+
+    // this.backendService.fetchData()
+    //   .then(data => {
+    //     console.log(data);
+    //   })
+    //   .catch(error => {
+    //     console.error('Error fetching data:', error);
+    //   });
+
   }
 
   roundNum(num: number): number {
