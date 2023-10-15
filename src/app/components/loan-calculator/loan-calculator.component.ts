@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import Chart from 'chart.js/auto';
+import { BackendService } from 'src/app/services/backend.service';
 
 @Component({
   selector: 'app-loan-calculator',
@@ -8,6 +8,27 @@ import Chart from 'chart.js/auto';
   styleUrls: ['./loan-calculator.component.scss'],
 })
 export class LoanCalculatorComponent {
+  @ViewChild('offersScroll', { static: false }) set myElement(
+    element: ElementRef | undefined
+  ) {
+    if (element) {
+      // Perform actions with the element when it becomes available
+
+      element.nativeElement.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+
+  @ViewChild('resultsScroll', { static: false }) set myElement2(
+    element: ElementRef | undefined
+  ) {
+    if (element) {
+      // Perform actions with the element when it becomes available
+
+      element.nativeElement.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+
+  constructor(private backendService: BackendService) {}
 
   calcData = {
     amount: 20000,
@@ -23,7 +44,9 @@ export class LoanCalculatorComponent {
   TIN: number = 0; // Total interest
   TCL: number = 0; // Total cost of the loan
 
-  outputData: any; 
+  outputData: any;
+
+  loanOffers: any;
 
   onSubmit(form: NgForm) {
     let num_pay_year: number; // Number of payments pew year
@@ -77,9 +100,32 @@ export class LoanCalculatorComponent {
       this.TIN = this.roundNum(this.TIN);
       this.TCL = this.roundNum(this.TCL);
 
-      this.outputData =  [this.calcData.amount, this.TIN, feeAmount];
-
+      this.outputData = [this.calcData.amount, this.TIN, feeAmount];
     }
+  }
+
+  showOffers() {
+    this.backendService.getLoanData().subscribe((data: any) => {
+      // Handle the data received from the backend.
+
+      const loanOffers = data;
+
+      // Process and handle the loan offers here
+      if (loanOffers && loanOffers.length > 0) {
+        // You can, for example, assign the loan offers to a component property
+
+        this.loanOffers = loanOffers;
+
+        // Or perform any other operations with the data
+        // ...
+
+        // Finally, log the data
+        console.log(loanOffers);
+      } else {
+        // Handle the case where no loan offers were received
+        console.log('No loan offers available.');
+      }
+    });
   }
 
   roundNum(num: number): number {

@@ -174,3 +174,44 @@ input[type="range"] {
 .centered-chart-container{
   align-items: center;
 }
+/* Add these styles to your component's CSS file or a global CSS file */
+
+.styled-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  text-align: left;
+}
+
+.styled-table th,
+.styled-table td {
+  padding: 12px 15px;
+}
+
+.styled-table th {
+  background-color: #1e1e2f;
+}
+
+.styled-table th,
+.styled-table td {
+  border-bottom: 1px solid #ddd;
+}
+
+.styled-table  {
+  background-color: #3e3858;
+}
+
+.styled-table tr:hover {
+  background-color: #007bff;
+}
+
+.styled-table th {
+  font-weight: bold;
+}
+
+.styled-table td {
+  font-weight: normal;
+}
+

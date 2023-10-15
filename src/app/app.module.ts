@@ -10,6 +10,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoanCalculatorComponent } from './components/loan-calculator/loan-calculator.component';
 import { FormsModule } from '@angular/forms';
 import { PieChartCalcComponent } from './components/pie-chart-calc/pie-chart-calc.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,7 @@ import { PieChartCalcComponent } from './components/pie-chart-calc/pie-chart-cal
     DashboardComponent,
     SidebarComponent,
     LoanCalculatorComponent,
-    PieChartCalcComponent
+    PieChartCalcComponent,
   ],
   imports: [
     BrowserModule,
@@ -25,6 +26,7 @@ import { PieChartCalcComponent } from './components/pie-chart-calc/pie-chart-cal
     BrowserAnimationsModule,
     NgbModule,
     FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent],

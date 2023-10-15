@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import Chart from 'chart.js/auto';
 
 
@@ -12,7 +12,7 @@ export class PieChartCalcComponent {
   public chart: any;
 
   @Input()
-  public data: any = [300, 240, 100];
+  public data: any;
 
   options = {
     aspectRatio: 1,
@@ -37,13 +37,25 @@ this.createChart(this.data);
 
 }
 
+ngOnChanges(changes: SimpleChanges): void {
+  if (changes['data'] && !changes['data'].firstChange) {
+    // If the 'data' input changes and it's not the initial change, re-draw the chart.
+    this.createChart(this.data);
+  }
+}
+
 createChart(inputData: any){
+
+  if (this.chart) {
+    // If a chart instance exists, destroy it before creating a new one.
+    this.chart.destroy();
+  }
 
   this.chart = new Chart("MyChart", {
     type: 'pie', //this denotes tha type of chart
 
     data: {// values on X-Axis
-      labels: ['Kwota kredytu', 'Odsetki','Prowizja banku'],
+      labels: ['Loan amount', 'Interest','Bank fee'],
        datasets: [{
   label: 'My First Dataset',
   data: inputData,
